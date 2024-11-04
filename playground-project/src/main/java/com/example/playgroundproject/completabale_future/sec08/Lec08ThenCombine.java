@@ -39,10 +39,10 @@ public class Lec08ThenCombine {
         try(var executor = Executors.newVirtualThreadPerTaskExecutor()){
             var cf1 = getDeltaAirline(executor);
             var cf2 = getFrontierAirline(executor);
-            var cf3 =  cf2.thenCombine(cf1,(a,b) -> a.amount<=b.amount? a:b)
+            var bestDeal =  cf2.thenCombine(cf1,(a,b) -> a.amount<=b.amount? a:b)
                     .thenApply(af-> new Airfare(af.name(),(int) (af.amount()*0.9))) //apply discount
                     .join();
-            log.info("Best Airfare Deal: {}",cf3);
+            log.info("Best Airfare Deal: {}",bestDeal);
 
         }
 

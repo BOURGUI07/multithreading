@@ -1,7 +1,10 @@
 package com.example.playgroundproject;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.time.Duration;
 
+@Slf4j
 public class Util {
     public static void sleepSeconds(long seconds) {
         try {
@@ -25,5 +28,13 @@ public class Util {
         var end = System.currentTimeMillis();
         var elapsed = end - start;
         System.out.println("Elapsed time: " + elapsed);
+    }
+
+    public static void sleepWithTask(String task, long secs){
+        try {
+            Thread.sleep(Duration.ofSeconds(secs));
+        } catch (InterruptedException e) {
+            log.error("Cancelling task: {}", task);
+        }
     }
 }
